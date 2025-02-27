@@ -2,6 +2,7 @@
 import { useRef, useEffect } from 'react';
 import ServiceCard from './ServiceCard';
 import { ArrowRight } from 'lucide-react';
+import { Button } from "@/components/ui/button";
 
 const Services = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -90,9 +91,9 @@ const Services = () => {
         </div>
         
         <div className="mt-12 md:mt-16 text-center">
-          <a href="#" className="btn-primary inline-flex items-center gap-2 group">
+          <Button className="btn-primary inline-flex items-center gap-2 group">
             View All Services <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
-          </a>
+          </Button>
         </div>
       </div>
     </section>

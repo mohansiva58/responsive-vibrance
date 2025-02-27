@@ -1,7 +1,7 @@
 
 import { useRef, useEffect } from 'react';
-import { cn } from '@/lib/utils';
 import { ArrowRight } from 'lucide-react';
+import { Button } from "@/components/ui/button";
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -89,12 +89,12 @@ const Hero = () => {
             </p>
             
             <div className="flex flex-wrap gap-4 pt-4 opacity-0 animate-fade-in" style={{ animationDelay: '0.7s', animationFillMode: 'forwards' }} ref={ctaRef}>
-              <a href="#services" className="btn-primary flex items-center gap-2 group">
+              <Button className="btn-primary flex items-center gap-2 group">
                 Get Started <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
-              </a>
-              <a href="#contact" className="btn-outline">
+              </Button>
+              <Button variant="outline" className="btn-outline">
                 Talk to Expert
-              </a>
+              </Button>
             </div>
             
             <div className="flex items-center gap-6 pt-6 opacity-0 animate-fade-in" style={{ animationDelay: '0.9s', animationFillMode: 'forwards' }}>
