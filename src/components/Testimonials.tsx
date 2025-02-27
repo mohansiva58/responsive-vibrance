@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import TestimonialCard from './TestimonialCard';
 import { cn } from '@/lib/utils';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -9,7 +9,6 @@ const Testimonials = () => {
   const [autoplay, setAutoplay] = useState(true);
   const autoplayRef = useRef<NodeJS.Timeout | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLDivElement>(null);
   
   const testimonials = [
     {
@@ -45,35 +44,6 @@ const Testimonials = () => {
       rating: 5
     }
   ];
-  
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-fade-in');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    
-    if (titleRef.current) observer.observe(titleRef.current);
-    
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (autoplay) {
-      autoplayRef.current = setInterval(() => {
-        setActiveIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-      }, 5000);
-    }
-    
-    return () => {
-      if (autoplayRef.current) {
-        clearInterval(autoplayRef.current);
-      }
-    };
-  }, [autoplay, testimonials.length]);
 
   const handlePrevious = () => {
     setActiveIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
@@ -94,7 +64,7 @@ const Testimonials = () => {
   return (
     <section id="testimonials" ref={sectionRef} className="py-16 md:py-24 bg-white">
       <div className="container mx-auto px-4 md:px-6">
-        <div ref={titleRef} className="text-center max-w-3xl mx-auto mb-12 md:mb-16 opacity-0">
+        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
           <div className="inline-block px-4 py-1 bg-rk-orange-light text-rk-orange rounded-full text-sm font-semibold mb-4">
             Testimonials
           </div>

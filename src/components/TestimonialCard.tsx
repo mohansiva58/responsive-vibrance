@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { cn } from '@/lib/utils';
 
 interface TestimonialCardProps {
@@ -23,12 +23,6 @@ const TestimonialCard = ({
 }: TestimonialCardProps) => {
   const [loaded, setLoaded] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
-
-  useEffect(() => {
-    if (imgRef.current && imgRef.current.complete) {
-      setLoaded(true);
-    }
-  }, []);
 
   return (
     <div className={cn(
@@ -62,12 +56,12 @@ const TestimonialCard = ({
       
       <div className="flex items-center">
         <div className="relative w-12 h-12 mr-4 rounded-full overflow-hidden">
-          <div className={cn("absolute inset-0 bg-rk-gray-light animate-pulse", loaded && "hidden")}></div>
+          {!loaded && <div className="absolute inset-0 bg-rk-gray-light"></div>}
           <img
             ref={imgRef}
             src={image}
             alt={author}
-            className={cn("w-full h-full object-cover rounded-full", !loaded && "opacity-0")}
+            className="w-full h-full object-cover rounded-full"
             onLoad={() => setLoaded(true)}
           />
         </div>

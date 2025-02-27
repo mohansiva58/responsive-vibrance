@@ -1,5 +1,5 @@
 
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -13,32 +13,13 @@ interface ServiceCardProps {
 
 const ServiceCard = ({ title, description, icon, link, index }: ServiceCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
-  
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-fade-up');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    
-    if (cardRef.current) observer.observe(cardRef.current);
-    
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <div 
-      ref={cardRef}
       className={cn(
         "bg-white rounded-xl p-6 shadow-md overflow-hidden relative transition-all duration-300",
-        isHovered ? "shadow-xl transform -translate-y-2" : "",
-        "opacity-0"
+        isHovered ? "shadow-xl transform -translate-y-2" : ""
       )}
-      style={{ animationDelay: `${index * 0.1}s`, animationFillMode: 'forwards' }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

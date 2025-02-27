@@ -1,28 +1,12 @@
 
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import ServiceCard from './ServiceCard';
 import { ArrowRight } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 const Services = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLDivElement>(null);
   
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-fade-in');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    
-    if (titleRef.current) observer.observe(titleRef.current);
-    
-    return () => observer.disconnect();
-  }, []);
-
   const services = [
     {
       title: "Company Registration",
@@ -65,7 +49,7 @@ const Services = () => {
   return (
     <section id="services" ref={sectionRef} className="py-16 md:py-24 bg-rk-gray-light">
       <div className="container mx-auto px-4 md:px-6">
-        <div ref={titleRef} className="text-center max-w-3xl mx-auto mb-12 md:mb-16 opacity-0">
+        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
           <div className="inline-block px-4 py-1 bg-rk-blue-light text-rk-blue rounded-full text-sm font-semibold mb-4">
             Our Services
           </div>
